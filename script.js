@@ -324,6 +324,9 @@ console.error(error);
 container.innerHTML = "<h3>Unable To Load Scorers</h3>";
 
 }
+
+}
+
 // ================= FOOTBALL NEWS =================
 
 async function loadFootballNews() {
