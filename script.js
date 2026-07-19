@@ -313,35 +313,47 @@ async function loadFootballNews(){
 
 console.log("News Function Started");
 
-const container=document.getElementById("news-container");
+const container = document.getElementById("news-container");
 
 if(!container) return;
 
-container.innerHTML="<h3>Loading Football News...</h3>";
+container.innerHTML = "<h3>Loading Football News...</h3>";
 
 try{
 
-const res=await fetch(
-
+const res = await fetch(
 `https://newsapi.org/v2/everything?q=football&language=en&sortBy=publishedAt&pageSize=8&apiKey=${NEWS_API_KEY}`
-
 );
 
 console.log("News Status:", res.status);
 
-if (!res.ok) {
-  console.log(await res.text());
-  throw new Error("News API Error");
+if(!res.ok){
+
+const errorText = await res.text();
+
+console.log("News Error:", errorText);
+
+container.innerHTML = `
+<div style="color:red;padding:15px;">
+<h3>News API Error</h3>
+<p>Status : ${res.status}</p>
+<pre>${errorText}</pre>
+</div>
+`;
+
+return;
+
 }
 
 const data = await res.json();
+
 console.log("News Data:", data);
 
-container.innerHTML="";
+container.innerHTML = "";
 
-if(!data.articles){
+if(!data.articles || data.articles.length===0){
 
-container.innerHTML="<h3>No News Found</h3>";
+container.innerHTML="<h3>No Football News Found</h3>";
 
 return;
 
@@ -350,34 +362,33 @@ return;
 data.articles.forEach(news=>{
 
 container.innerHTML+=`
-
 <div class="news-card">
 
-<img src="${news.urlToImage || 'news.jpg'}">
+<img src="${news.urlToImage || 'news.jpg'}" alt="News">
 
 <h3>${news.title}</h3>
 
 <p>${news.description || ""}</p>
 
 <a href="${news.url}" target="_blank">
-
 Read More →
-
 </a>
 
 </div>
-
 `;
 
 });
 
 }catch(error){
 
-console.error(error);
+console.error("News Catch Error:", error);
 
-container.innerHTML=
-
-"<h3>Unable To Load Football News</h3>";
+container.innerHTML=`
+<div style="color:red;padding:15px;">
+<h3>Unable To Load Football News</h3>
+<pre>${error}</pre>
+</div>
+`;
 
 }
 
