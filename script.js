@@ -8,8 +8,6 @@
 
 const FOOTBALL_API_KEY = "010a2d3719c5443792d8bf3b0a0768f8";
 
-const NEWS_API_KEY = "fefba19b4f614ba4b729251c1637402e";
-
 const BASE_URL = "https://api.football-data.org/v4";
 
 const headers = {
@@ -309,9 +307,7 @@ container.innerHTML=
 
 // ================= FOOTBALL NEWS =================
 
-async function loadFootballNews(){
-
-console.log("News Function Started");
+async function loadFootballNews() {
 
 const container = document.getElementById("news-container");
 
@@ -321,74 +317,49 @@ container.innerHTML = "<h3>Loading Football News...</h3>";
 
 try{
 
-const res = await fetch(
-`https://newsapi.org/v2/everything?q=football&language=en&sortBy=publishedAt&pageSize=8&apiKey=${NEWS_API_KEY}`
-);
+const res = await fetch("https://api.allorigins.win/raw?url=https://feeds.bbci.co.uk/sport/football/rss.xml");
 
-console.log("News Status:", res.status);
+const text = await res.text();
 
-if(!res.ok){
+const parser = new DOMParser();
 
-const errorText = await res.text();
+const xml = parser.parseFromString(text,"text/xml");
 
-console.log("News Error:", errorText);
-
-container.innerHTML = `
-<div style="color:red;padding:15px;">
-<h3>News API Error</h3>
-<p>Status : ${res.status}</p>
-<pre>${errorText}</pre>
-</div>
-`;
-
-return;
-
-}
-
-const data = await res.json();
-
-console.log("News Data:", data);
+const items = xml.querySelectorAll("item");
 
 container.innerHTML = "";
 
-if(!data.articles || data.articles.length===0){
+items.forEach((item,index)=>{
 
-container.innerHTML="<h3>No Football News Found</h3>";
+if(index>=8) return;
 
-return;
+const title = item.querySelector("title")?.textContent;
 
-}
+const link = item.querySelector("link")?.textContent;
 
-data.articles.forEach(news=>{
+const description = item.querySelector("description")?.textContent;
 
-container.innerHTML+=`
+container.innerHTML += `
+
 <div class="news-card">
 
-<img src="${news.urlToImage || 'news.jpg'}" alt="News">
+<h3>${title}</h3>
 
-<h3>${news.title}</h3>
+<p>${description}</p>
 
-<p>${news.description || ""}</p>
-
-<a href="${news.url}" target="_blank">
-Read More →
-</a>
+<a href="${link}" target="_blank">Read More →</a>
 
 </div>
+
 `;
 
 });
 
 }catch(error){
 
-console.error("News Catch Error:", error);
+console.log(error);
 
-container.innerHTML=`
-<div style="color:red;padding:15px;">
-<h3>Unable To Load Football News</h3>
-<pre>${error}</pre>
-</div>
-`;
+container.innerHTML="<h3>Unable To Load News</h3>";
 
 }
 
