@@ -164,65 +164,70 @@ table.innerHTML=
 
 // ================= FIXTURES =================
 
-async function loadFixtures(){
+async function loadFixtures() {
+
 console.log("Fixtures Function Started");
-const container=document.getElementById("fixtures-container");
 
-if(!container) return;
+const container = document.getElementById("fixtures-container");
 
-container.innerHTML="<h3>Loading Fixtures...</h3>";
+if (!container) return;
 
-try{
+container.innerHTML = "<h3>Loading Fixtures...</h3>";
 
-const res=await fetch(
+try {
 
+const res = await fetch(
 `${BASE_URL}/competitions/PL/matches?status=SCHEDULED`,
-
-{headers}
-
+{
+headers
+}
 );
 
 console.log("Fixtures Status:", res.status);
 
 if (!res.ok) {
-  console.log(await res.text());
-  throw new Error("Fixtures API Error");
+
+const errorText = await res.text();
+
+console.log("Fixtures Error:", errorText);
+
+container.innerHTML = `
+<div style="color:red;padding:15px;">
+<h3>Fixtures API Error</h3>
+<p>Status : ${res.status}</p>
+<pre>${errorText}</pre>
+</div>
+`;
+
+return;
+
 }
 
 const data = await res.json();
+
 console.log("Fixtures Data:", data);
 
-container.innerHTML="";
+container.innerHTML = "";
 
-const matches=data.matches.slice(0,10);
+if (!data.matches || data.matches.length === 0) {
 
-matches.forEach(match=>{
+container.innerHTML = "<h3>No Upcoming Fixtures</h3>";
 
-container.innerHTML+=`
+return;
+
+}
+
+data.matches.forEach(match => {
+
+container.innerHTML += `
 
 <div class="schedule-card">
 
-<h3>
+<h3>${match.homeTeam.name} VS ${match.awayTeam.name}</h3>
 
-${match.homeTeam.name}
+<p>📅 ${new Date(match.utcDate).toLocaleDateString()}</p>
 
-VS
-
-${match.awayTeam.name}
-
-</h3>
-
-<p>
-
-📅 ${new Date(match.utcDate).toLocaleDateString()}
-
-</p>
-
-<p>
-
-🕒 ${new Date(match.utcDate).toLocaleTimeString()}
-
-</p>
+<p>🕒 ${new Date(match.utcDate).toLocaleTimeString()}</p>
 
 </div>
 
@@ -230,13 +235,11 @@ ${match.awayTeam.name}
 
 });
 
-}catch(error){
+} catch (error) {
 
 console.error(error);
 
-container.innerHTML=
-
-"<h3>Unable To Load Fixtures</h3>";
+container.innerHTML = "<h3>Unable To Load Fixtures</h3>";
 
 }
 
@@ -253,31 +256,52 @@ if(!container) return;
 
 container.innerHTML="<h3>Loading Scorers...</h3>";
 
-try{
+try {
 
-const res=await fetch(
-
+const res = await fetch(
 `${BASE_URL}/competitions/PL/scorers`,
-
-{headers}
-
+{
+headers
+}
 );
 
 console.log("Scorers Status:", res.status);
 
 if (!res.ok) {
-  console.log(await res.text());
-  throw new Error("Scorers API Error");
+
+const errorText = await res.text();
+
+console.log("Scorers Error:", errorText);
+
+container.innerHTML = `
+<div style="color:red;padding:15px;">
+<h3>Scorers API Error</h3>
+<p>Status : ${res.status}</p>
+<pre>${errorText}</pre>
+</div>
+`;
+
+return;
+
 }
 
 const data = await res.json();
+
 console.log("Scorers Data:", data);
 
-container.innerHTML="";
+container.innerHTML = "";
+
+if (!data.scorers || data.scorers.length === 0) {
+
+container.innerHTML = "<h3>No Top Scorers Found</h3>";
+
+return;
+
+}
 
 data.scorers.slice(0,10).forEach(player=>{
 
-container.innerHTML+=`
+container.innerHTML += `
 
 <div class="scorer-card">
 
@@ -293,18 +317,13 @@ container.innerHTML+=`
 
 });
 
-}catch(error){
+} catch(error){
 
 console.error(error);
 
-container.innerHTML=
-
-"<h3>Unable To Load Scorers</h3>";
+container.innerHTML = "<h3>Unable To Load Scorers</h3>";
 
 }
-
-}
-
 // ================= FOOTBALL NEWS =================
 
 async function loadFootballNews() {
