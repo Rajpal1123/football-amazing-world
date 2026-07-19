@@ -1,322 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Amazing World</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Football Amazing World</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-  <div id="loader">
-    <h2>⚽ Football Amazing World</h2>
+
+<!-- Loader -->
+
+<div id="loader">
+
+<div class="loader-content">
+
+<h2>⚽ Football Amazing World</h2>
+
+<p>Loading Live Football Data...</p>
+
 </div>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="#">Home</a>
-        <a href="#players">Players</a>
-        <a href="#video">Videos</a>
-        <a href="#contact">Contact</a>
-    </nav>
+</div>
+
+<!-- Header -->
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+
+⚽ Football Amazing World
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#live-score">Live</a></li>
+
+<li><a href="#table">Table</a></li>
+
+<li><a href="#fixtures">Fixtures</a></li>
+
+<li><a href="#scorers">Scorers</a></li>
+
+<li><a href="#news">News</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<!-- Search -->
+
 <section class="search-box">
-    <input type="text" id="searchInput" placeholder="Search players, teams...">
-    <button>Search</button>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Teams or Players...">
+
+<button id="searchBtn">
+
+🔍 Search
+
+</button>
+
 </section>
-    <!-- Hero Section -->
-    <section class="slider">
 
-<img id="slider" src="messi.jpg" alt="Football Player">
+<!-- Slider -->
+
+<section class="slider">
+
+<img id="slider"
+
+src="messi.jpg"
+
+alt="Football">
+
+<div class="slider-overlay">
+
+<h1>FIFA World Cup 2026</h1>
+
+<p>
+
+Live Scores • Standings • Fixtures • Top Scorers
+
+</p>
+
+</div>
 
 </section>
-    <section class="hero">
-        <h1>Football Amazing World</h1>
-        <p>Welcome to my football website!</p>
-        <h3>🔥 Live Scores • Match Highlights • Latest Football News • Top Players</h3>
-        <img src="football.jpg" alt="Football" class="football-img">
-        <div class="hero-buttons">
-    <a href="#video"><button>▶ Watch Highlights</button></a>
-    <a href="#players"><button>⭐ Top Players</button></a>
-</div>
-    </section>
 
-    <br>
+<!-- Hero -->
 
-    <!-- Buttons -->
-    <a href="news.html">
-        <button>Latest Football News</button>
-    </a>
-    <div id="news-container">
-    Loading latest football news...
-</div>
+<section class="hero">
 
-    <a href="highlights.html">
-        <button>Watch Highlights</button>
-    </a>
+<h1>
 
-    <!-- News Section -->
-    <section class="news">
+Football Amazing World
 
-        <div class="news-card">
-            <h3>⚽ FIFA World Cup 2026</h3>
-            <p>Get the latest World Cup updates, match results and top player news.</p>
-        </div>
+</h1>
 
-        <div class="news-card">
-            <h3>🔥 Transfer News</h3>
-            <p>Follow the biggest football transfer rumours from around the world.</p>
-        </div>
+<p>
 
-        <div class="news-card">
-            <h3>🏆 Match Highlights</h3>
-            <p>Watch exciting goals and amazing saves from top football matches.</p>
-        </div>
+Your Ultimate Football Hub
 
-    </section>
-    <section class="live-score">
+</p>
 
-<h2>🔴 Live Match Score</h2>
+<div class="hero-buttons">
 
-<div class="match-card">
+<a href="#live-score">
 
-<div class="team">
-<img src="argentina.png" alt="Argentina">
-<h3>Argentina</h3>
-</div>
+<button>
 
-<div class="score">
-<h1>2 - 1</h1>
-<p>75' Minute</p>
-<span class="live">LIVE</span>
-</div>
+🔴 Live Matches
 
-<div class="team">
-<img src="brazil.png" alt="Brazil">
-<h3>Brazil</h3>
-</div>
+</button>
+
+</a>
+
+<a href="#fixtures">
+
+<button>
+
+📅 Fixtures
+
+</button>
+
+</a>
+
+<a href="#table">
+
+<button>
+
+🏆 Standings
+
+</button>
+
+</a>
 
 </div>
+
 </section>
-<section class="points-table">
 
-<h2>🏆 FIFA World Cup 2026 Points Table</h2>
+<!-- Live Matches -->
+
+<section id="live-score" class="live-score">
+
+<h2>
+
+🔴 Live Match Scores
+
+</h2>
+
+<div id="live-score-container">
+
+Loading Live Matches...
+
+</div>
+
+</section>
+
+<!-- Standings -->
+
+<section id="table" class="points-table">
+
+<h2>
+
+🏆 Points Table
+
+</h2>
 
 <table>
 
+<thead>
+
 <tr>
+
 <th>Team</th>
+
 <th>MP</th>
+
 <th>W</th>
+
 <th>D</th>
+
+<th>L</th>
+
 <th>Pts</th>
+
 </tr>
 
-<tr>
-<td>🇦🇷 Argentina</td>
-<td>3</td>
-<td>3</td>
-<td>0</td>
-<td>9</td>
-</tr>
+</thead>
+
+<tbody id="table-body">
 
 <tr>
-<td>🇧🇷 Brazil</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>7</td>
+
+<td colspan="6">
+
+Loading...
+
+</td>
+
 </tr>
 
-<tr>
-<td>🇪🇸 Spain</td>
-<td>3</td>
-<td>2</td>
-<td>0</td>
-<td>6</td>
-</tr>
-
-<tr>
-<td>🇫🇷 France</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>4</td>
-</tr>
+</tbody>
 
 </table>
 
 </section>
-<section class="match-schedule">
+<!-- ========================= -->
+<!-- UPCOMING FIXTURES -->
+<!-- ========================= -->
 
-<h2>📅 Upcoming Match Schedule</h2>
+<section id="fixtures" class="match-schedule">
+
+<h2>📅 Upcoming Fixtures</h2>
+
+<div id="fixtures-container">
 
 <div class="schedule-card">
-<h3>🇦🇷 Argentina 🆚 🇧🇷 Brazil</h3>
-<p>🗓️ 20 July 2026 | 🕗 8:00 PM</p>
+
+Loading Fixtures...
+
 </div>
 
-<div class="schedule-card">
-<h3>🇪🇸 Spain 🆚 🇫🇷 France</h3>
-<p>🗓️ 21 July 2026 | 🕗 9:00 PM</p>
-</div>
-
-<div class="schedule-card">
-<h3>🇵🇹 Portugal 🆚 🇩🇪 Germany</h3>
-<p>🗓️ 22 July 2026 | 🕗 7:30 PM</p>
 </div>
 
 </section>
-<section class="top-scorers">
 
-<h2>⚽ Top Goal Scorers</h2>
+<!-- ========================= -->
+<!-- TOP SCORERS -->
+<!-- ========================= -->
+
+<section id="scorers" class="top-scorers">
+
+<h2>⚽ Top Scorers</h2>
+
+<div id="scorers-container">
 
 <div class="scorer-card">
+
+Loading Top Scorers...
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOOTBALL NEWS -->
+<!-- ========================= -->
+
+<section id="news" class="latest-news">
+
+<h2>📰 Latest Football News</h2>
+
+<div id="news-container">
+
+Loading Latest News...
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- MATCH HIGHLIGHTS -->
+<!-- ========================= -->
+
+<section class="highlights">
+
+<h2>🎥 Match Highlights</h2>
+
+<div class="highlight-grid">
+
+<div class="highlight-card">
+<h3>Latest Highlights</h3>
+<p>Watch the latest football highlights here.</p>
+</div>
+
+<div class="highlight-card">
+<h3>World Cup 2026</h3>
+<p>Best goals and amazing saves.</p>
+</div>
+
+<div class="highlight-card">
+<h3>Top Moments</h3>
+<p>Great football action from around the world.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- TOP PLAYERS -->
+<!-- ========================= -->
+
+<section id="players" class="players-section">
+
+<h2>⭐ Top Players</h2>
+
+<div class="players">
+
+<div class="player-card">
 <img src="messi.jpg" alt="Messi">
 <h3>Lionel Messi</h3>
-<p>Goals: 6 ⚽</p>
 </div>
 
-<div class="scorer-card">
+<div class="player-card">
+<img src="ronaldo.jpg" alt="Cristiano Ronaldo">
+<h3>Cristiano Ronaldo</h3>
+</div>
+
+<div class="player-card">
 <img src="mbappe.jpg" alt="Mbappe">
 <h3>Kylian Mbappé</h3>
-<p>Goals: 5 ⚽</p>
 </div>
 
-<div class="scorer-card">
-<img src="haaland.jpg" alt="Haaland">
-<h3>Erling Haaland</h3>
-<p>Goals: 4 ⚽</p>
-</div>
-
-<div class="scorer-card">
+<div class="player-card">
 <img src="yamal.jpg" alt="Yamal">
 <h3>Lamine Yamal</h3>
-<p>Goals: 3 ⚽</p>
+</div>
+
 </div>
 
 </section>
 
-    <!-- Video -->
-    <h2 id="video">Football Highlights Video</h2>
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
 
-    <video width="320" controls>
-        <source src="football.mp4" type="video/mp4">
-    </video>
+<footer id="contact">
 
-    <!-- Players -->
-    <h2 id="players">Top Players</h2>
-    <h2>🏆 FIFA World Cup 2026</h2>
+<div class="footer-container">
 
-<div class="news-card">
-<h3>World Cup 2026 Updates</h3>
-<p>Latest matches, points table and top scorers.</p>
+<h2>⚽ Football Amazing World</h2>
+
+<p>
+Live Football Scores, Standings, Fixtures,
+Top Scorers & Latest Football News.
+</p>
+
+<div class="footer-links">
+
+<a href="#">Home</a>
+
+<a href="#live-score">Live</a>
+
+<a href="#table">Table</a>
+
+<a href="#fixtures">Fixtures</a>
+
+<a href="#news">News</a>
+
 </div>
 
-    <div class="players">
-        <img src="messi.jpg" alt="Messi" class="football-img">
-        <img src="ronaldo.jpg" alt="Ronaldo" class="football-img">
-        <img src="yamal.jpg" alt="Yamal" class="football-img">
-    </div>
+<p>
 
-    <!-- Footer -->
-    <footer id="contact">
+© <span id="year">2026</span>
 
+Football Amazing World
 
-<p>📧 Contact: football@example.com</p>
+</p>
 
-<p>📍 India</p>
+</div>
 
-<section class="social">
+</footer>
 
-<h2>🌍 Follow Us</h2>
+<!-- Back To Top -->
 
-<a href="https://youtube.com/" target="_blank">
-<button>▶ YouTube</button>
-</a>
+<button id="topBtn" onclick="topFunction()">
 
-<a href="https://instagram.com/" target="_blank">
-<button>📷 Instagram</button>
-</a>
+⬆
 
-<a href="https://facebook.com/" target="_blank">
-<button>📘 Facebook</button>
-</a>
+</button>
 
-</section>
+<!-- Script -->
 
-<p>© 2026 Football Amazing World | Made by Rajpal</p>
-    </footer>
-    <button id="topBtn" onclick="topFunction()">⬆ Top</button>
-<script>
-// ===== Image Slider =====
-const images = [
-  "messi.jpg",
-  "ronaldo.jpg",
-  "mbappe.jpg",
-  "haaland.jpg",
-  "yamal.jpg"
-];
+<script src="script.js"></script>
 
-let i = 0;
-
-setInterval(function () {
-  i = (i + 1) % images.length;
-  document.getElementById("slider").src = images[i];
-}, 3000);
-</script>
-
-<script>
-// ===== Search =====
-const searchInput = document.getElementById("searchInput");
-
-searchInput.addEventListener("keyup", function () {
-  let value = this.value.toLowerCase();
-
-  let cards = document.querySelectorAll(
-    ".news-card, .scorer-card, .schedule-card"
-  );
-
-  cards.forEach(function(card) {
-    if (card.innerText.toLowerCase().includes(value)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-});// Back To Top Button
-let topBtn = document.getElementById("topBtn");
-
-window.onscroll = function () {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        topBtn.style.display = "block";
-    } else {
-        topBtn.style.display = "none";
-    }
-};
-
-function topFunction() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });// Loader
-window.onload = function(){
-    document.getElementById("loader").style.display = "none";
-}
-const news = [
-  "⚽ Messi scores a stunning goal!",
-  "🔥 Spain reaches the World Cup Final!",
-  "🇦🇷 Argentina prepares for the Final.",
-  "🏆 FIFA World Cup 2026 latest updates.",
-  "⭐ Lamine Yamal shines again!"
-];
-
-let index = 0;
-
-setInterval(() => {
-  document.getElementById("news-container").innerHTML =
-    `<h3>${news[index]}</h3>`;
-  index = (index + 1) % news.length;
-}, 3000);
-</script>
 </body>
+
 </html>
