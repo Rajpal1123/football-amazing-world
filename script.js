@@ -100,14 +100,13 @@ table.innerHTML=
 
 try{
 
-const res=await fetch(
+const competition = document.getElementById("competitionSelect").value;
 
-`${BASE_URL}/competitions/PL/standings`,
-
+const res = await fetch(
+`${BASE_URL}/competitions/${competition}/scorers`,
 {
 headers
 }
-
 );
 
 console.log("Standings Status:", res.status);
@@ -176,8 +175,11 @@ container.innerHTML = "<h3>Loading Fixtures...</h3>";
 
 try {
 
+const competition =
+document.getElementById("competitionSelect").value;
+
 const res = await fetch(
-`${BASE_URL}/competitions/PL/matches?status=SCHEDULED`,
+`${BASE_URL}/competitions/${competition}/matches?status=SCHEDULED`,
 {
 headers
 }
@@ -244,6 +246,78 @@ container.innerHTML = "<h3>Unable To Load Fixtures</h3>";
 }
 
 }
+async function loadTodayMatches() {
+
+const container = document.getElementById("today-matches-container");
+
+if (!container) return;
+
+container.innerHTML = "<h3>Loading Today's Matches...</h3>";
+
+try {
+
+const competition =
+document.getElementById("competitionSelect").value;
+
+const res = await fetch(
+`${BASE_URL}/competitions/${competition}/matches`,
+{
+headers
+}
+);
+
+if (!res.ok) throw new Error("API Error");
+
+const data = await res.json();
+
+const today = new Date().toISOString().split("T")[0];
+
+const matches = data.matches.filter(match =>
+match.utcDate.startsWith(today)
+);
+
+container.innerHTML = "";
+
+if(matches.length===0){
+
+container.innerHTML="<h3>No Matches Today</h3>";
+
+return;
+
+}
+
+matches.forEach(match=>{
+
+container.innerHTML +=`
+
+<div class="live-card">
+
+<h3>${match.homeTeam.name} VS ${match.awayTeam.name}</h3>
+
+<p>🕒 ${new Date(match.utcDate).toLocaleTimeString()}</p>
+
+<p>${match.status}</p>
+
+</div>
+
+`;
+
+});
+
+}catch(error){
+
+console.error("Today's Matches Error:", error);
+
+container.innerHTML = `
+<h3>Unable To Load Today's Matches</h3>
+<p>${error.message}</p>
+`;
+
+}
+
+
+
+}
 
 // ================= TOP SCORERS =================
 
@@ -258,8 +332,10 @@ container.innerHTML="<h3>Loading Scorers...</h3>";
 
 try {
 
+const competition = document.getElementById("competitionSelect").value;
+
 const res = await fetch(
-`${BASE_URL}/competitions/PL/scorers`,
+`${BASE_URL}/competitions/${competition}/standings`,
 {
 headers
 }
@@ -498,17 +574,13 @@ behavior:"smooth"
 
 // =============== LOADER =================
 
-window.addEventListener("load",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-const loader=document.getElementById("loader");
+const loader = document.getElementById("loader");
 
-if(loader){
+if (loader) {
 
-setTimeout(()=>{
-
-loader.style.display="none";
-
-},1000);
+loader.style.display = "none";
 
 }
 
@@ -528,10 +600,22 @@ loadStandings();
 
 loadFixtures();
 
+loadTodayMatches();
+
 loadTopScorers();
 
 loadFootballNews();
 
+}
+const competitionSelect =
+document.getElementById("competitionSelect");
+
+if (competitionSelect) {
+  competitionSelect.addEventListener("change", () => {
+    loadFixtures();
+    loadStandings();
+    loadTopScorers();
+  });
 }
 
 // =============== AUTO REFRESH =================
